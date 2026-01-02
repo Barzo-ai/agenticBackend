@@ -60,9 +60,9 @@ export class ProductsService {
             // console.log('Search Result Result: ', result);
 
 
-            return result;
-            // const normalized = normalize(result);
-            // return this.aiService.matchAndExplain(normalized);
+            // return result;
+            const normalized = normalize(result);
+            return this.aiService.matchAndExplain(normalized);
 
         } catch (e) {
             console.log('Search Result: ', e);
