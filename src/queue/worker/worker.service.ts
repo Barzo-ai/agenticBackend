@@ -1,13 +1,17 @@
 /* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/require-await */
 
 import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
 import { scrapeJumia } from 'src/scrapers/jumia.scraper';
-// import { scrapeKonga } from 'src/scrapers/konga.scraper';
-import { scrapeAmazon } from 'src/scrapers/amazon.scraper';
+import { scrapeKonga } from 'src/scrapers/konga.scraper';
+// import { scrapeAmazon } from 'src/scrapers/amazon.scraper';
+// import { scrapeAmazons } from 'src/scrapers/amazon2.scraper';
+// import { scrapeEbay } from 'src/scrapers/ebay.scraper';
 import { Worker } from 'bullmq';
+// import { OxyEbay } from 'src/scrapers/oxylap.scraper';
 
 @Injectable()
 export class WorkerService implements OnModuleInit, OnModuleDestroy {
@@ -33,9 +37,12 @@ export class WorkerService implements OnModuleInit, OnModuleDestroy {
                 const { query } = job.data;
 
                 const results = await Promise.allSettled<any[]>([
+                    // OxyEbay(query),
+                    scrapeKonga(query),
                     scrapeJumia(query),
-                    // scrapeKonga(query),
-                    scrapeAmazon(query),
+                    // scrapeAmazons(query),
+                    // scrapeAmazon(query),
+                    // scrapeEbay(query)
                 ]);
 
                 const products = results.flatMap(result =>
@@ -61,9 +68,12 @@ export class WorkerService implements OnModuleInit, OnModuleDestroy {
                 const { query } = job.data;
 
                 const results = await Promise.allSettled<any[]>([
+                    // OxyEbay(query),
+                    scrapeKonga(query),
                     scrapeJumia(query),
-                    // scrapeKonga(query),
-                    scrapeAmazon(query),
+                    // scrapeAmazons(query),
+                    // scrapeAmazon(query),
+                    // scrapeEbay(query)
                 ]);
 
                 const products = results.flatMap(result =>

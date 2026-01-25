@@ -53,19 +53,32 @@ export class ProductsService {
         try {
             const job = await this.queue.add('search', { query });
 
-            // console.log('Search Result Adding: ', job);
-
+            // Wait for worker result
             const result = await job.waitUntilFinished(this.queueEvents, 60000);
 
-            // console.log('Search Result Result: ', result);
-
-
-            // return result;
+            // Normalize raw scraper output
             const normalized = normalize(result);
-            return this.aiService.matchAndExplain(normalized);
 
+            // AI matching & explanation
+            const explain = await this.aiService.matchAndExplain(normalized)
+            // const explain = await Promise.race([
+            //     this.aiService.matchAndExplain(normalized),
+            //     new Promise(resolve =>
+            //         setTimeout(() => resolve({
+            //             productName: null,
+            //             offers: [],
+            //             recommendation: 'AI analysis timed out'
+            //         }), 12000)
+            //     )])
+
+
+            return {
+                products: normalized,
+                explain,
+            };
         } catch (e) {
-            console.log('Search Result: ', e);
+            console.error('Search Result Error:', e);
+            throw e;
         }
     }
 }
