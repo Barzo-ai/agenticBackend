@@ -40,7 +40,7 @@ export async function scrapeKonga(query: string) {
 
     // Extract products
     const products = await page.$$eval('li.List_listItem__KlvU2', (items) =>
-      items.slice(0, 10).map((item) => {
+      items.slice(0, 20).map((item) => {
         const title =
           item.querySelector('h3.ListingCard_productTitle__9Kzxv')?.textContent?.trim();
         const price =
