@@ -34,7 +34,7 @@ export async function scrapeJumia(query: string) {
     });
 
     const products = await page.$$eval('article.prd', (cards) =>
-      cards.slice(0, 10).map((card) => {
+      cards.slice(20).map((card) => {
         const title = card.querySelector('h3')?.textContent?.trim();
         const price = card.querySelector('.prc')?.textContent?.trim();
         const img =
