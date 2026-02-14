@@ -10,13 +10,24 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   // CORS configuration
-  const corsOptions = {
-    origin: '*',
-    credentials: true,
-    optionSuccessStatus: 200,
-  };
+  // const corsOptions = {
+  //   origin: '*',
+  //   credentials: true,
+  //   optionSuccessStatus: 200,
+  // };
 
-  app.use(cors(corsOptions));
+  // app.use(cors(corsOptions));
+
+  // Use NestJS's built-in CORS
+  app.enableCors({
+    origin: '*', // Be more specific than '*'
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  });
+
   app.use(helmet());
   await app.listen(process.env.PORT ?? 3000);
 }
