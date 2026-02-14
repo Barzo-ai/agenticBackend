@@ -8,7 +8,7 @@ import { chromium, BrowserContext } from 'playwright';
 export async function scrapeKonga(query: string) {
   const browser = await chromium.launch({
     headless: true,
-    args: ['--disable-blink-features=AutomationControlled'], // helps bypass headless detection
+    args: ['--no-sandbox', '--disable-setuid-sandbox','--disable-blink-features=AutomationControlled'], // helps bypass headless detection
   });
 
   const context: BrowserContext = await browser.newContext({

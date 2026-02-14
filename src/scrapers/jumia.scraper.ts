@@ -4,7 +4,7 @@ import { chromium } from 'playwright';
 export async function scrapeJumia(query: string) {
   const browser = await chromium.launch({
     headless: true,
-    args: ['--disable-blink-features=AutomationControlled'],
+    args: ['--no-sandbox', '--disable-setuid-sandbox','--disable-blink-features=AutomationControlled'],
   });
 
   const context = await browser.newContext({
