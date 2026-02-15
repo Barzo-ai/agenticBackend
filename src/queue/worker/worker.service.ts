@@ -53,8 +53,8 @@ export class WorkerService implements OnModuleInit, OnModuleDestroy {
             },
             {
                 connection: {
-                    host: process.env.REDIS_HOST || 'localhost',
-                    port: parseInt(process.env.REDIS_PORT || '6379'),
+                    url: process.env.REDIS_URL || 'localhost',
+                    // port: parseInt(process.env.REDIS_PORT || '6379'),
                 },
                 concurrency: 2,
             }
@@ -84,8 +84,8 @@ export class WorkerService implements OnModuleInit, OnModuleDestroy {
             },
             {
                 connection: {
-                    host: process.env.REDIS_HOST || 'localhost',
-                    port: parseInt(process.env.REDIS_PORT || '6379'),
+                    url: process.env.REDIS_URL || 'localhost',
+                    // port: parseInt(process.env.REDIS_PORT || '6379'),
                 },
                 concurrency: 2,
             }
