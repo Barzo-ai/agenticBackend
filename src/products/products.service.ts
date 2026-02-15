@@ -24,7 +24,7 @@ export class ProductsService {
     ) {
         this.queueEvents = new QueueEvents('scraping', {
             connection: {
-                host: this.configService.get("REDIS_HOST"),
+                url: this.configService.get("REDIS_HOST"),
                 port: this.configService.get("REDIS_PORT"),
             },
         });
@@ -32,7 +32,7 @@ export class ProductsService {
         // Events for second queue
         this.queueEvents2 = new QueueEvents('scraping2', {
             connection: {
-                host: this.configService.get("REDIS_HOST"),
+                url: this.configService.get("REDIS_HOST"),
                 port: this.configService.get("REDIS_PORT"),
             },
         });

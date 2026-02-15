@@ -13,15 +13,15 @@ import { BullModule } from '@nestjs/bullmq';
     BullModule.registerQueue({
       name: 'scraping',
       connection: {
-        host: 'localhost',
-        port: 6379,
+        url: process.env.REDIS_URL || 'localhost',
+        port: parseInt(process.env.REDIS_PORT || '6379'),
       },
     }),
     BullModule.registerQueue({
       name: 'scraping2',
       connection: {
-        host: 'localhost',
-        port: 6379,
+        url: process.env.REDIS_URL || 'localhost',
+        port: parseInt(process.env.REDIS_PORT || '6379'),
       },
     }),
     AiModule,
