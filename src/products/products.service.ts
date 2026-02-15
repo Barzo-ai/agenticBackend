@@ -24,16 +24,29 @@ export class ProductsService {
     ) {
         this.queueEvents = new QueueEvents('scraping', {
             connection: {
-                url: this.configService.get("REDIS_HOST"),
-                port: this.configService.get("REDIS_PORT"),
+                // url: this.configService.get("REDIS_HOST"),
+                // port: this.configService.get("REDIS_PORT"),
+                // host: 'redis.railway.internal',
+                // port: 6379,
+                // username: 'default',
+                // password: 'DXALtgHTcLRmtrsRANoUkHQWfDhVuZpX'
+                url: this.configService.get<string>('REDIS_URL'),
+                // tls: {},
             },
         });
 
         // Events for second queue
         this.queueEvents2 = new QueueEvents('scraping2', {
             connection: {
-                url: this.configService.get("REDIS_HOST"),
-                port: this.configService.get("REDIS_PORT"),
+                // url: this.configService.get("REDIS_HOST"),
+                // port: this.configService.get("REDIS_PORT"),
+                // host: 'redis.railway.internal',
+                // port: 6379,
+                // username: 'default',
+                // password: 'DXALtgHTcLRmtrsRANoUkHQWfDhVuZpX'
+                url: this.configService.get<string>('REDIS_URL'),
+                // tls: {},
+
             },
         });
     }
